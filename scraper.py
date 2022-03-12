@@ -1,10 +1,10 @@
 
 from urllib.request import urlopen
+import re
 
-
-url2 = "https://www.deployers.co.uk/"
+url = "https://www.inspiringinterns.com/job-board/all"
 #page = urlopen(url)
-page = urlopen(url2)
+page = urlopen(url)
 
 html_bytes = page.read()
 html = html_bytes.decode("utf-8")
@@ -18,5 +18,14 @@ end_index = html.find("</title>")
 end_index
 title = html[start_index:end_index]
 
-#prints the title h1 tag
+url3 = "https://www.inspiringinterns.com/job-board/all"
+page = urlopen(url3)
+
+html = page.read().decode("utf-8")
+
+pattern = "<h1(.*?)>.*?</h1>"
+match_results = re.search(pattern, html, re.IGNORECASE)
+title = match_results.group()
+title = re.sub("<.*?>", "", title) # Remove HTML tags
+
 print(title)
