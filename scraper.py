@@ -1,6 +1,9 @@
 
 '''
-Description: 
+Amitesh Nagarkar
+
+Description: Program to get all Data related Job Titles from the Inspiring Interns website to an excel document.
+
 '''
 from urllib.request import urlopen
 import re
@@ -9,9 +12,9 @@ import requests
 import pandas as pd
 
 '''
-Function: ScrapDataJobs - Takes job title as a parameter and search for job with data in them.
+Function: ScrapeDataJobs - Takes job title as a parameter and searches for jobs with data in their title.
 '''
-def scrapDataJobs(job_titles):
+def scrapeDataJobs(job_titles):
   dataJobs = []
   
   filterredDataJobs = list(filter(lambda x: "Data" in x, job_titles))
@@ -25,9 +28,9 @@ def scrapDataJobs(job_titles):
     excelWriter.save()
 
 '''
-Function: scrapJobTitles - Scrapes for H1 tag on the insperinginterms jobboard wbesite
+Function: scrapeJobTitles - Scrapes for H1 tag on the Inspiring Interns job-board site & pulls all job titles.
 '''
-def scrapJobTitles(totalPages):
+def scrapeJobTitles(totalPages):
   print('Started.. hold on...');
   job_titles = []
   pageCounter = 1
@@ -46,8 +49,8 @@ Main module to start scraping.
 '''
 def startScraping():
     print('Starting scraping. Looking for Data jobs on Inspiring Interns....Please wait');
-    job_titles = scrapJobTitles(50); #50 jobs at the moment but can be scrapped for actual value
-    scrapDataJobs(job_titles);
+    job_titles = scrapeJobTitles(50); #50 jobs at the moment but can be scrapped for actual value
+    scrapeDataJobs(job_titles);
     print('Done!. Scraping data is available at : InspiringInterns-DJ.xlsx');
 
 if __name__ == "__main__":
