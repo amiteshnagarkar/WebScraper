@@ -33,26 +33,16 @@ while page != 50:
       response = requests.get(url)
       html = response.content
       soup = BeautifulSoup(html, "html.parser")
-      #heading_tags = ["h1"]
+      
+      
+      #only returns job titles that have Data.
       for h1 in soup.find_all("h1", class_="hide-for-mobile"):
             job_titles.append(h1.get_text(strip=True))
       page = page + 1
-len(job_titles)
+#print(len(job_titles))
+#print(job_titles)
 
-#prints n number of job titles, regardless of page number, there are 50 pages.
-n=10
-for title in job_titles[:n]:
+result = list(filter(lambda x: "Data" in x, job_titles))
+n=588 #use result of print(len(job_titles))
+for title in result[:n]:
     print(title)
-
-
-
-
-#does same thing as above
-#print(soup.h1.string)
-
-# retreives all job titles from page 1
-#heading_tags = ["h1"]
-#for tags in soup.find_all(heading_tags):
-    #print(tags.text.strip())
-
-
